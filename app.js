@@ -2,7 +2,7 @@
    COMMON CONFIG – UPDATE ONCE
 ================================ */
 
-const API_URL = "https://script.google.com/macros/s/AKfycbwwzDvaWT4mWrFIBuYnMkhNSnQI4DiDN1sEArBK_BB8LC4aMxAu0bfdx2md2nP-frlzUQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzuPsjy7xqnDemNPdTbJ9jkitFSWIHNXGQjXd_pkDgynR09q5CpzB9Vv66GK2_5V1Sp/exec";
 
 /* ===============================
    COMMON API HELPER
@@ -71,3 +71,4 @@ const Sound = {
     });
   }
 };
+
