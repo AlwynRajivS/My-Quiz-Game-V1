@@ -125,12 +125,12 @@ let quizEnded = false;
 let poller = null;
 
 
-/* 🔄 MAIN POLL */
+/* MAIN POLL */
 function load(){
   api("getQuestion",{quizId}).then(d=>{
     if (quizEnded) return;
 
-    /* 🏁 QUIZ END */
+    /* QUIZ END */
     if(d.done){
       if(!quizEnded){
         quizEnded = true;
@@ -145,7 +145,7 @@ function load(){
   disableOptions();
   timer.textContent = `⏱ Revealing answer ${d.timeLeft}s`;
 
-  // ✅ SHOW RESULT DURING REVEAL (ONCE)
+  // SHOW RESULT DURING REVEAL (ONCE)
   if(resultShownForQ !== d.qNo){
     resultShownForQ = d.qNo;
 
@@ -176,7 +176,7 @@ function load(){
   return;
 }
 
-    /* ❓ NEW QUESTION */
+    /* NEW QUESTION */
     if(currentQ !== d.qNo){
       currentQ = d.qNo;
       answered = false;
@@ -191,11 +191,15 @@ function load(){
   });
 }
 
-/* 🎯 ANSWER */
+/* ANSWER */
 function answer(opt){
   if(answered) return;
   answered = true;
   disableOptions();
+
+  result.textContent = "You answered, wait for result...";
+  result.style.color = "#38bdf8"; 
+  timer.textContent = "";
 
   api("submitAnswer",{
     quizId,
@@ -203,14 +207,14 @@ function answer(opt){
     name,
     answer: opt
   }).then(r=>{
-    // ✅ STORE RESULT LOCALLY
+    // STORE RESULT LOCALLY
     lastAnswerCorrect = r.correct;
     lastAnswerPoints  = r.points || 0;
   });
 }
 
 
-/* 🏆 TOP 10 */
+/* TOP 10 */
 function showPlayerLeaderboard(){
   const lb = document.getElementById("midLeaderboard");
   lb.style.display = "block";
@@ -230,7 +234,7 @@ function showPlayerLeaderboard(){
   });
 }
 
-/* 🏁 FINAL TOP 3 */
+/* FINAL TOP 3 */
 function showFinalLeaderboard(){
   options.style.display="none";
   timer.textContent="";
@@ -270,7 +274,7 @@ function exitPlayer(){
   location.href = "join.html";
 }
 
-/* 🔧 HELPERS */
+/* HELPERS */
 function disableOptions(){
   document.querySelectorAll(".option").forEach(b=>b.disabled=true);
 }
